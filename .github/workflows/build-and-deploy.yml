@@ -22,6 +22,10 @@ jobs:
         run: |
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Get repo name
+        id: get_repo_name
+        run: |
+          REPO_NAME=$(basename -s .git "$(git config --get remote.origin.url)")
 
       - name: Create alfa directory
         run: mkdir -p alfa
@@ -37,7 +41,6 @@ jobs:
         run: |
           ORIGINAL_MESSAGE=$(git -C ../ log -1 --pretty=%B | head -n 1)
           COMMIT_TIME=$(date +'%Y-%m-%d_%H:%M')
-          REPO_NAME=$(basename -s .git "$(git config --get remote.origin.url)")
           git add beta_data
           git commit -m "${COMMIT_TIME} ${REPO_NAME} update: ${ORIGINAL_MESSAGE}" || echo "Nothing to commit"
           git push https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/kovacs-zsolt-nxtroy/repo_alfa HEAD:main
