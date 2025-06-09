@@ -29,5 +29,14 @@ jobs:
         run: git clone https://github.com/kovacs-zsolt-nxtroy/repo_beta beta
       - name: Clone repo_beta into beta
         run: ls -la
-      - name: Clone repo_beta into beta
-        run: ls beta -la
+      - name: Copy data/ to beta/alfa_data
+        run: |
+          mkdir -p beta/alfa_data
+          cp -r data/* beta/alfa_data/
+
+      - name: Commit and push to repo_beta
+        working-directory: beta
+        run: |
+          git add alfa_data
+          git commit -m "$(date +'%Y-%m-%d')_beta frissites" || echo "Nothing to commit"
+          git push
