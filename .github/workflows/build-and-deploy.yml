@@ -36,5 +36,5 @@ jobs:
         working-directory: alfa
         run: |
           git add beta_data
-          git commit -m "$(date +'%Y-%m-%d')_beta frissites" || echo "Nothing to commit"
+          git commit -m "$(date +'%Y-%m-%d_%H:%M')_beta frissites" || echo "Nothing to commit"
           git push https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/kovacs-zsolt-nxtroy/repo_alfa HEAD:main
