@@ -26,7 +26,7 @@ jobs:
       - name: Create alfa directory
         run: mkdir -p alfa
       - name: Clone repo_alfa into alfa
-        run: git clone https://github.com/kovacs-zsolt-nxtroy/repo_alfa beta
+        run: git clone https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/kovacs-zsolt-nxtroy/repo_alfa alfa
       - name: Copy data/ to alfa/beta_data
         run: |
           mkdir -p alfa/beta_data
