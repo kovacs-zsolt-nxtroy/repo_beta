@@ -23,20 +23,18 @@ jobs:
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Create beta directory
-        run: mkdir -p beta
-      - name: Clone repo_beta into beta
-        run: git clone https://github.com/kovacs-zsolt-nxtroy/repo_beta beta
-      - name: Clone repo_beta into beta
-        run: ls -la
-      - name: Copy data/ to beta/alfa_data
+      - name: Create alfa directory
+        run: mkdir -p alfa
+      - name: Clone repo_alfa into alfa
+        run: git clone https://github.com/kovacs-zsolt-nxtroy/repo_alfa beta
+      - name: Copy data/ to alfa/beta_data
         run: |
-          mkdir -p beta/alfa_data
-          cp -r data/* beta/alfa_data/
+          mkdir -p alfa/beta_data
+          cp -r data/* alfa/beta_data/
 
       - name: Commit and push to repo_beta
-        working-directory: beta
+        working-directory: alfa
         run: |
-          git add alfa_data
+          git add beta_data
           git commit -m "$(date +'%Y-%m-%d')_beta frissites" || echo "Nothing to commit"
-          git push https://x-access-token:${{ secrets.REPO_BETA_TOKEN }}@github.com/kovacs-zsolt-nxtroy/repo_beta HEAD:main
+#          git push https://x-access-token:${{ secrets.REPO_BETA_TOKEN }}@github.com/kovacs-zsolt-nxtroy/repo_alfa HEAD:main
