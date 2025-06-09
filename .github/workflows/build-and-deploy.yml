@@ -39,4 +39,4 @@ jobs:
         run: |
           git add alfa_data
           git commit -m "$(date +'%Y-%m-%d')_beta frissites" || echo "Nothing to commit"
-          git push
+#          git push
