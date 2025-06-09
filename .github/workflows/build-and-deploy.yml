@@ -29,3 +29,5 @@ jobs:
         run: git clone https://github.com/kovacs-zsolt-nxtroy/repo_beta beta
       - name: Clone repo_beta into beta
         run: ls -la
+      - name: Clone repo_beta into beta
+        run: ls beta -la
