@@ -25,9 +25,9 @@ jobs:
       - name: Get repo name
         id: get_repo_name
         run: |
-          REPO_NAME=$(basename -s .git "$(git config --get remote.origin.url)")
+          echo "repo_name=$(basename -s .git $(git config --get remote.origin.url))" >> $GITHUB_OUTPUT
       - name: print repo name
-        run: echo ${REPO_NAME}
+        run: echo "${{ steps.get_repo_name.outputs.repo_name }}"
 
       - name: Create alfa directory
         run: mkdir -p alfa
@@ -44,5 +44,5 @@ jobs:
           ORIGINAL_MESSAGE=$(git -C ../ log -1 --pretty=%B | head -n 1)
           COMMIT_TIME=$(date +'%Y-%m-%d_%H:%M')
           git add beta_data
-          git commit -m "${COMMIT_TIME} ${REPO_NAME} update: ${ORIGINAL_MESSAGE}" || echo "Nothing to commit"
+          git commit -m "${COMMIT_TIME} ${{ steps.get_repo_name.outputs.repo_name }} update: ${ORIGINAL_MESSAGE}"
           git push https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/kovacs-zsolt-nxtroy/repo_alfa HEAD:main
