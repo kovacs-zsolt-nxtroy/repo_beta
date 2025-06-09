@@ -26,6 +26,8 @@ jobs:
         id: get_repo_name
         run: |
           REPO_NAME=$(basename -s .git "$(git config --get remote.origin.url)")
+      - name: print repo name
+        run: echo ${REPO_NAME}
 
       - name: Create alfa directory
         run: mkdir -p alfa
